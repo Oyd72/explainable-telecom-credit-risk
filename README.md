@@ -36,3 +36,17 @@ python -m src.modeling.train
 ```
 
 The model card is available at `docs/model_card.md`.
+
+
+## Explainability
+
+The reference model is explained with global and local SHAP analysis plus constrained counterfactual-style examples. SHAP describes how the Random Forest uses its inputs; it is not interpreted causally. Counterfactuals are restricted to observed training-range values and are used only to inspect model sensitivity around the operating threshold.
+
+Run:
+
+```bash
+python -m src.explainability.shap_analysis
+python -m src.explainability.counterfactual
+```
+
+Method details are documented in `docs/explainability.md`.
