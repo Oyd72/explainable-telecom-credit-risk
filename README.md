@@ -15,3 +15,24 @@ The unexplained change in outcome labels after 23 July 2016 is treated as a data
 ## Repository structure
 
 The repository is organised around data preparation, modelling, explainability, monitoring, inference, deployment and governance. The initial structure is being created before selected components are rebuilt from the earlier prototype.
+
+
+## Modelling
+
+Model development uses expanding chronological folds instead of random train/test mixing. Logistic regression provides an interpretable baseline, with Random Forest and XGBoost as nonlinear candidates.
+
+The current reference specification is a 12-feature Random Forest with isotonic calibration. It is trained through 6 July 2016, calibrated on 7–13 July, and evaluated on a final holdout covering 14–23 July.
+
+Run the benchmark with:
+
+```bash
+python -m src.modeling.benchmark
+```
+
+Fit and evaluate the reference model with:
+
+```bash
+python -m src.modeling.train
+```
+
+The model card is available at `docs/model_card.md`.

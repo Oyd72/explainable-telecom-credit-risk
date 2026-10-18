@@ -1,0 +1,39 @@
+data:
+  processed_path: data/processed/telecom_delinquency_model_ready.csv
+  date_column: pdate
+  target_column: delinquent_5d
+
+splits:
+  training_end: "2016-07-06"
+  calibration_start: "2016-07-07"
+  calibration_end: "2016-07-13"
+  holdout_start: "2016-07-14"
+  holdout_end: "2016-07-23"
+
+features:
+  - cnt_ma_rech90
+  - daily_decr30
+  - last_rech_date_ma
+  - sumamnt_ma_rech90
+  - aon
+  - last_rech_amt_ma
+  - daily_decr90
+  - sumamnt_ma_rech30
+  - medianamnt_ma_rech30
+  - medianmarechprebal90
+  - rental30
+  - cnt_ma_rech30
+
+model:
+  family: random_forest
+  n_estimators: 300
+  max_depth: 8
+  min_samples_leaf: 20
+  max_features: sqrt
+  class_weight: balanced_subsample
+  random_state: 42
+
+calibration:
+  method: isotonic
+
+operating_threshold: 0.1751
