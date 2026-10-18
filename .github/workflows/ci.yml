@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-serving.txt
+
+      - name: Compile Python entry points
+        run: |
+          python -m py_compile \
+            src/inference/predict.py \
+            src/api/app.py \
+            src/pipeline/flow.py \
+            src/modeling/train.py \
+            src/modeling/retrain.py \
+            src/explainability/shap_analysis.py \
+            src/explainability/counterfactual.py \
+            src/monitoring/run.py \
+            dashboards/stakeholder_app.py \
+            dashboards/monitoring_app.py
+
+      - name: Validate Docker Compose
+        run: docker compose config --quiet
+
+      - name: Check stakeholder dashboard starts
+        run: |
+          streamlit run dashboards/stakeholder_app.py --server.headless true --server.port 8501 > /tmp/stakeholder.log 2>&1 &
+          APP_PID=$!
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:8501/_stcore/health; then
+              kill $APP_PID
+              wait $APP_PID || true
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/stakeholder.log
+          kill $APP_PID || true
+          exit 1
+
+      - name: Check monitoring dashboard starts
+        run: |
+          streamlit run dashboards/monitoring_app.py --server.headless true --server.port 8502 > /tmp/monitoring.log 2>&1 &
+          APP_PID=$!
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:8502/_stcore/health; then
+              kill $APP_PID
+              wait $APP_PID || true
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/monitoring.log
+          kill $APP_PID || true
+          exit 1

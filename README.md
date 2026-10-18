@@ -71,3 +71,27 @@ An optional Evidently cross-check is available through `src/monitoring/evidently
 The project includes a lightweight governance layer covering intended use, fairness limits, impact assessment, retraining, incident response and model retirement. Passing a technical metric does not automatically approve a new model or a new use case.
 
 Key documents are under `docs/governance/`. Governed retraining is implemented in `src/modeling/retrain.py` with automatic promotion disabled.
+
+
+## Serving and dashboards
+
+After building the model with `python -m src.modeling.train`, start the API with:
+
+```bash
+uvicorn src.api.app:app --reload
+```
+
+Or run the containerised services:
+
+```bash
+docker compose up --build
+```
+
+Local endpoints:
+
+- API: `http://localhost:8000`
+- API documentation: `http://localhost:8000/docs`
+- stakeholder dashboard: `http://localhost:8501`
+- monitoring dashboard: `http://localhost:8502`
+
+The architecture is documented in `docs/architecture.md`.
