@@ -122,7 +122,7 @@ def clean_raw(raw_path: str, interim_path: str, run_id: str) -> str:
     logger = get_run_logger()
     logger.info("Creating cleaned interim dataset %s", interim_path)
     _run_python_script(
-        "src/data/clean_interim.py", "--data", raw_path, "--output", interim_path
+        "src/data/clean.py", "--data", raw_path, "--output", interim_path
     )
     append_privacy_event(
         run_id=run_id,
@@ -235,7 +235,7 @@ def representation_diagnostics(processed_path: str, interim_path: str, run_id: s
 
 
 @flow(name="telecom-credit-risk-data-pipeline", log_prints=True)
-def telecom_delinquency_etl(
+def telecom_credit_risk_pipeline(
     raw_path: str = str(DEFAULT_RAW),
     interim_path: str = str(DEFAULT_INTERIM),
     processed_path: str = str(DEFAULT_PROCESSED),
@@ -277,4 +277,4 @@ def telecom_delinquency_etl(
 
 
 if __name__ == "__main__":
-    telecom_delinquency_etl()
+    telecom_credit_risk_pipeline()
