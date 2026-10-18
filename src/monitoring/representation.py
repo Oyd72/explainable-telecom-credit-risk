@@ -1,4 +1,4 @@
-"""Representation and bias diagnostics for the the project telecom pipeline.
+"""Representation diagnostics for the telecom credit-risk pipeline.
 
 The source data do not contain usable demographic protected characteristics. This
 suite therefore does not claim demographic fairness assessment. It measures only
@@ -118,7 +118,7 @@ def evaluate_representation(data: pd.DataFrame, interim: pd.DataFrame | None = N
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run representation and bias diagnostics.")
+    parser = argparse.ArgumentParser(description="Run representation diagnostics.")
     parser.add_argument("--data", default=str(DEFAULT_DATA))
     parser.add_argument("--interim", default=str(DEFAULT_INTERIM))
     parser.add_argument("--table", default=str(DEFAULT_TABLE))
