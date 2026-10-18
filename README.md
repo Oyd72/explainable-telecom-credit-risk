@@ -64,3 +64,10 @@ python -m src.monitoring.run
 ```
 
 An optional Evidently cross-check is available through `src/monitoring/evidently_check.py`. The monitoring design is documented in `docs/monitoring.md`.
+
+
+## Governance and lifecycle
+
+The project includes a lightweight governance layer covering intended use, fairness limits, impact assessment, retraining, incident response and model retirement. Passing a technical metric does not automatically approve a new model or a new use case.
+
+Key documents are under `docs/governance/`. Governed retraining is implemented in `src/modeling/retrain.py` with automatic promotion disabled.
