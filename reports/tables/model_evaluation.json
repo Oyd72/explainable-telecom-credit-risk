@@ -1,0 +1,18 @@
+{
+  "training_rows": 101241,
+  "calibration_rows": 20878,
+  "holdout_rows": 28648,
+  "feature_count": 12,
+  "threshold": 0.1751,
+  "metrics": {
+    "roc_auc": 0.8288423894199206,
+    "average_precision": 0.5673338965129551,
+    "brier": 0.12299623169180528,
+    "ece_10bin": 0.02928014272705042,
+    "top20_capture": 0.5405677809507812,
+    "precision": 0.42605080831408776,
+    "recall": 0.7747354275155384,
+    "f1": 0.5497675527476458
+  },
+  "note": "Privacy-safe reproducibility evidence from the rebuilt reference model."
+}
