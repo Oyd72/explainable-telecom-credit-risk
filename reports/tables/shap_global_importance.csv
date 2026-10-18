@@ -1,0 +1,13 @@
+feature,mean_abs_shap,mean_shap
+cnt_ma_rech90,0.074507,-0.053897
+sumamnt_ma_rech90,0.060572,-0.042940
+sumamnt_ma_rech30,0.042510,-0.020268
+cnt_ma_rech30,0.037700,-0.014817
+daily_decr30,0.030590,-0.019875
+rental30,0.026938,0.019387
+last_rech_date_ma,0.025129,0.003386
+daily_decr90,0.021756,-0.005082
+aon,0.016572,-0.003297
+medianmarechprebal90,0.015812,-0.008220
+medianamnt_ma_rech30,0.007273,-0.005511
+last_rech_amt_ma,0.006385,-0.004863

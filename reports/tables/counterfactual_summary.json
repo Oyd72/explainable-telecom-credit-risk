@@ -1,0 +1,42 @@
+{
+  "threshold": 0.1751,
+  "cases": [
+    {
+      "case": "near_boundary_lower_risk",
+      "original_score": 0.138268156424581,
+      "counterfactual_found": true,
+      "search_type": "single_feature",
+      "counterfactual_score": 0.18515797207935344,
+      "normalized_distance": 0.07238264851800025,
+      "changes": [
+        {
+          "feature": "sumamnt_ma_rech90",
+          "from": 4617,
+          "to": 4048
+        }
+      ]
+    },
+    {
+      "case": "near_boundary_higher_risk",
+      "original_score": 0.18515797207935344,
+      "counterfactual_found": true,
+      "search_type": "single_feature",
+      "counterfactual_score": 0.138268156424581,
+      "normalized_distance": 0.10915792458179756,
+      "changes": [
+        {
+          "feature": "sumamnt_ma_rech30",
+          "from": 3083,
+          "to": 3853
+        }
+      ]
+    },
+    {
+      "case": "representative_high_risk",
+      "original_score": 0.4765625000000001,
+      "counterfactual_found": false
+    }
+  ],
+  "interpretation_caution": "Counterfactuals describe the fitted model's response to constrained input changes. They are not causal claims and are not recommendations for customer behaviour.",
+  "reproducibility_note": "Generated from the public source dataset using the standalone model specification and explainability workflow."
+}
