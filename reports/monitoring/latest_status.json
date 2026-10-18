@@ -1,0 +1,40 @@
+{
+  "model_name": "telecom_repayment_risk_random_forest_isotonic",
+  "reference_period": "2016-06-01 through 2016-07-13",
+  "comparison_period": "2016-07-14 through 2016-07-23",
+  "reference_rows": 122119,
+  "comparison_rows": 28648,
+  "overall_drift_status": "escalate",
+  "features_escalate": [
+    "daily_decr90",
+    "daily_decr30",
+    "rental30",
+    "sumamnt_ma_rech90",
+    "cnt_ma_rech90",
+    "last_rech_amt_ma"
+  ],
+  "features_watch": [
+    "medianamnt_ma_rech30",
+    "last_rech_date_ma"
+  ],
+  "prediction_drift": {
+    "psi": 0.16802405592663433,
+    "ks_statistic": 0.07610952188337844,
+    "reference_mean": 0.18423513589534185,
+    "current_mean": 0.17851795836203085,
+    "severity": "watch"
+  },
+  "comparison_performance": {
+    "roc_auc": 0.8288423894199206,
+    "average_precision": 0.5673338965129551,
+    "precision": 0.42605080831408776,
+    "recall": 0.7747354275155384,
+    "f1": 0.5497675527476458,
+    "brier": 0.12299623169180528,
+    "ece_10bin": 0.02928014272705042,
+    "top20_capture": 0.5405677809507812,
+    "operating_threshold": 0.1751
+  },
+  "interpretation": "Drift is a signal for investigation, not proof of model failure. The later labelled period still shows useful predictive performance.",
+  "fairness_boundary": "No reliable protected demographic attributes are available, so operational drift is not demographic fairness evidence."
+}

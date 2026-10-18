@@ -1,0 +1,16 @@
+{
+  "source_rows": 150767,
+  "feature_count": 12,
+  "reference": {
+    "start": "2016-06-01",
+    "end": "2016-07-13",
+    "rows": 122119
+  },
+  "comparison": {
+    "start": "2016-07-14",
+    "end": "2016-07-23",
+    "rows": 28648,
+    "labels_reliable": true
+  },
+  "note": "Historical monitoring demonstration using the development population as reference and the later holdout as comparison."
+}
