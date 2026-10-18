@@ -7,4 +7,4 @@ PyYAML
 great_expectations==1.23.0
 prefect
 fairlearn
-shap\nmatplotlib\n
+shap\nmatplotlib\nevidently

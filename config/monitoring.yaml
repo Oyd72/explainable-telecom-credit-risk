@@ -1,0 +1,19 @@
+drift:
+  psi_watch: 0.10
+  psi_escalate: 0.25
+  missingness_watch_pp: 2.0
+  missingness_escalate_pp: 5.0
+
+performance:
+  operating_threshold: 0.1751
+
+reference:
+  end: "2016-07-13"
+
+comparison:
+  start: "2016-07-14"
+  end: "2016-07-23"
+
+governance:
+  outcome_metrics_require_reliable_labels: true
+  protected_group_fairness_claims_supported: false

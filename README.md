@@ -50,3 +50,17 @@ python -m src.explainability.counterfactual
 ```
 
 Method details are documented in `docs/explainability.md`.
+
+
+## Monitoring
+
+The project separates label-free drift detection from outcome-based performance monitoring. Feature and prediction distributions can be checked immediately; ROC-AUC, calibration and error metrics are calculated only when trustworthy labels are available.
+
+Run:
+
+```bash
+python -m src.monitoring.prepare
+python -m src.monitoring.run
+```
+
+An optional Evidently cross-check is available through `src/monitoring/evidently_check.py`. The monitoring design is documented in `docs/monitoring.md`.
