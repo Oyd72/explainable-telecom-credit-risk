@@ -12,6 +12,10 @@ It does **not** approve or refuse credit automatically.
 
 The project is built around a broader question than model accuracy alone: **can a model remain useful while its data distribution is changing, and how should that be governed?**
 
+## Architecture at a glance
+
+![Project architecture](docs/assets/architecture-overview.svg)
+
 ## Why this project is interesting
 
 The source data contain a useful real-world complication. After **23 July 2016**, all 58,825 remaining records are labelled as successful repayment, with no explanation in the source documentation. Those later labels are therefore not treated as ordinary supervised ground truth.
@@ -51,6 +55,8 @@ A useful monitoring result appears alongside these metrics: the model continues 
 | Overall drift status | **Escalate** |
 
 This is the central operational lesson of the project: **drift is a reason to investigate, not proof that a model has already failed**.
+
+![Monitoring snapshot](docs/assets/monitoring-snapshot.svg)
 
 ## Modelling approach
 
