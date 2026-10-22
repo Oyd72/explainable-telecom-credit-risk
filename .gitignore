@@ -218,3 +218,31 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project data and generated artefacts
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/monitoring/*
+!data/monitoring/.gitkeep
+
+models/*.joblib
+models/*.pkl
+models/*.pickle
+models/candidates/*
+!models/candidates/.gitkeep
+
+# Generated local outputs
+reports/figures/**/*.png
+reports/figures/**/*.svg
+reports/monitoring/evidently_*.html
+reports/monitoring/evidently_*.json
+reports/privacy/*.jsonl
+reports/privacy/*.log
+
+# Local experiment tracking
+mlruns/
+mlflow.db
