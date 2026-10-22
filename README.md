@@ -271,3 +271,10 @@ Fresh representative validation would be required before deployment on a differe
 ## Project origin
 
 This repository is a standalone rebuild of an earlier analytics prototype. The code structure, documentation, reproducibility workflow and lifecycle controls have been reorganised around the project itself rather than an external delivery framework.
+
+
+## Cloud deployment
+
+The two Streamlit dashboards can be deployed directly from `main` without raw data or a model binary. The Render API rebuilds the reference model during deployment from the public Kaggle source and deletes temporary row-level data before serving starts.
+
+Deployment details are in [`docs/deployment.md`](docs/deployment.md). A Render Blueprint is included in [`render.yaml`](render.yaml).
