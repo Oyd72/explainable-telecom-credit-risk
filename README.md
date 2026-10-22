@@ -252,7 +252,7 @@ Local endpoints:
 | Service | Address |
 |---|---|
 | FastAPI service | `http://localhost:8000` |
-| Interactive API docs | `http://localhost:8000/docs` |
+| Interactive API docs | `http://localhost:8000/docs` |\n| API liveness | `http://localhost:8000/health` |\n| API readiness | `http://localhost:8000/ready` |
 | Stakeholder dashboard | `http://localhost:8501` |
 | Monitoring dashboard | `http://localhost:8502` |
 
@@ -275,6 +275,6 @@ This repository is a standalone rebuild of an earlier analytics prototype. The c
 
 ## Cloud deployment
 
-The two Streamlit dashboards can be deployed directly from `main` without raw data or a model binary. The Render API rebuilds the reference model during deployment from the public Kaggle source and deletes temporary row-level data before serving starts.
+The two Streamlit dashboards can be deployed directly from `main` without raw data or a model binary. The stakeholder dashboard uses the deployed FastAPI service for its interactive prediction explorer; set `PREDICTION_API_URL` as a Streamlit secret if the Render service uses a non-default URL. The Render API rebuilds the reference model during deployment from the public Kaggle source and deletes temporary row-level data before serving starts.
 
 Deployment details are in [`docs/deployment.md`](docs/deployment.md). A Render Blueprint is included in [`render.yaml`](render.yaml).
