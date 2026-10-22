@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements-serving.txt
 
       - name: Run tests
-        run: pytest
+        run: python -m pytest
 
       - name: Compile Python entry points
         run: |
