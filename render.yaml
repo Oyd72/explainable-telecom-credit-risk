@@ -6,4 +6,4 @@ services:
     autoDeploy: true
     buildCommand: pip install -r requirements-serving.txt && python scripts/build_deployment_model.py
     startCommand: uvicorn src.api.app:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
+    healthCheckPath: /ready
