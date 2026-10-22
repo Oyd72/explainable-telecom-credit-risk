@@ -254,7 +254,7 @@ The model binary is generated locally and is not committed by default.
 
 ## Technology
 
-Python, pandas, scikit-learn, XGBoost, SHAP, Great Expectations, Prefect, Evidently, FastAPI, Streamlit, Docker, GitHub Actions and MLflow-oriented experiment practices.
+Python, pandas, scikit-learn, XGBoost, SHAP, Great Expectations, Prefect, Evidently, FastAPI, Streamlit, Docker and GitHub Actions.
 
 ## Important limitations
 
