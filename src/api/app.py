@@ -18,7 +18,7 @@ MODEL_PATH = PROJECT_ROOT / "models/repayment_risk_model.joblib"
 
 app = FastAPI(
     title="Explainable telecom credit risk API",
-    version="1.0.0",
+    version="1.1.0",
     description=(
         "Returns calibrated five-day repayment-risk probabilities. "
         "The service supports prioritisation and does not implement an automated lending decision."
@@ -58,6 +58,13 @@ def get_model_package() -> dict:
     return joblib.load(MODEL_PATH)
 
 
+def validate_model_package(package: dict) -> None:
+    required = {"base_model", "calibrator", "features", "operating_threshold"}
+    missing = sorted(required.difference(package))
+    if missing:
+        raise ValueError(f"Model package is missing required entries: {missing}")
+
+
 @app.get("/")
 def root() -> dict[str, str]:
     return {"status": "ok", "service": "explainable-telecom-credit-risk-api"}
@@ -65,9 +72,38 @@ def root() -> dict[str, str]:
 
 @app.get("/health")
 def health() -> dict[str, str]:
+    """Liveness check: the API process is running."""
+    return {"status": "ok", "service": "explainable-telecom-credit-risk-api"}
+
+
+@app.get("/ready")
+def ready() -> dict[str, str]:
+    """Readiness check: a valid model package can be loaded for prediction."""
+    try:
+        package = get_model_package()
+        validate_model_package(package)
+    except (FileNotFoundError, OSError, ValueError, KeyError) as exc:
+        raise HTTPException(status_code=503, detail=f"Model is not ready: {exc}") from exc
+    return {"status": "ready", "model": "available"}
+
+
+@app.get("/model-info")
+def model_info() -> dict:
+    """Expose non-sensitive model inputs needed by the public prediction explorer."""
+    try:
+        package = get_model_package()
+        validate_model_package(package)
+        base_model = package["base_model"]
+        imputer = base_model.named_steps["imputer"]
+        medians = [float(value) for value in imputer.statistics_]
+    except (FileNotFoundError, OSError, ValueError, KeyError, AttributeError) as exc:
+        raise HTTPException(status_code=503, detail=f"Model is not ready: {exc}") from exc
+
+    features = list(package["features"])
     return {
-        "status": "ok",
-        "model": "available" if MODEL_PATH.exists() else "not_built",
+        "features": features,
+        "operating_threshold": float(package["operating_threshold"]),
+        "imputation_medians": dict(zip(features, medians)),
     }
 
 
@@ -75,11 +111,12 @@ def health() -> dict[str, str]:
 def predict(request: PredictionRequest) -> PredictionResponse:
     try:
         package = get_model_package()
+        validate_model_package(package)
         row = pd.DataFrame([request.model_dump()])
         result = predict_frame(row, package).iloc[0]
     except FileNotFoundError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
-    except ValueError as exc:
+    except (ValueError, KeyError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     return PredictionResponse(
