@@ -11,8 +11,13 @@ Raw and derived row-level data are deleted before the build step exits.
 from __future__ import annotations
 
 import shutil
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 import joblib
 import kagglehub
@@ -27,7 +32,6 @@ from src.data.clean import clean_dataframe
 from src.features.build_dataset import build_model_dataset
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_HANDLE = "sivakrishna3311/delinquency-telecom-dataset"
 SOURCE_FILENAME = "sample_data_intw.csv"
 
