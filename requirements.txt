@@ -10,3 +10,4 @@ fairlearn
 shap
 matplotlib
 evidently
+pytest
